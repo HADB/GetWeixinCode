@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信登陆</title>
+</head>
+<body>
+    <script>
+        var authUrlBase = 'https://open.weixin.qq.com/connect/oauth2/authorize#wechat_redirect';
+        function getUrlParams(key) {
+            var args = {};
+            var pairs = location.search.substring(1).split('&');
+            for (var i = 0; i < pairs.length; i++) {
+                var pos = pairs[i].indexOf('=');
+                if (pos === -1) {
+                    continue;
+                }
+                args[pairs[i].substring(0, pos)] = decodeURIComponent(pairs[i].substring(pos + 1));
+            }
+            return args[key];
+        }
+        function appendParams(params, url) {
+            var baseWithSearch = url.split('#')[0];
+            var hash = url.split('#')[1];
+            for (var i = 0; i < params.length; i++) {
+                if (params[i].value !== undefined) {
+                    var newParam = params[i].key + "=" + params[i].value;
+                    if (baseWithSearch.indexOf('?') > 0) {
+                        var oldParamReg = new RegExp(params[i].key + '=[-\\w]{0,40}', 'g');
+
+                        if (oldParamReg.test(baseWithSearch)) {
+                            baseWithSearch = baseWithSearch.replace(oldParamReg, newParam);
+                        } else {
+                            baseWithSearch += "&" + newParam;
+                        }
+                    } else {
+                        baseWithSearch += "?" + newParam;
+                    }
+                }
+            }
+            if (hash) {
+                url = baseWithSearch + '#' + hash;
+            } else {
+                url = baseWithSearch;
+            }
+            return url;
+        }
+
+        var code = getUrlParams('code');
+        var appId = getUrlParams('appid');
+        var scope = getUrlParams('scope') || 'snsapi_base';
+        var state = getUrlParams('state');
+        var redirectUrl;
+        if (!code) {
+            redirectUrl = appendParams([{
+                key: 'appid',
+                value: appId
+            }, {
+                key: 'redirect_uri',
+                value: encodeURIComponent(location.href)
+            }, {
+                key: 'response_type',
+                value: 'code'
+            }, {
+                key: 'scope',
+                value: scope
+            }, {
+                key: 'state',
+                value: state
+            }], authUrlBase);
+        } else {
+            redirectUrl = appendParams([{key: 'code', value: code}], getUrlParams('redirect_uri'));
+        }
+        location.href = redirectUrl;
+    </script>
+</body>
+</html>
