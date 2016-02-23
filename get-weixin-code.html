@@ -6,7 +6,6 @@
 </head>
 <body>
     <script>
-        var authUrlBase = 'https://open.weixin.qq.com/connect/oauth2/authorize#wechat_redirect';
         function getUrlParams(key) {
             var args = {};
             var pairs = location.search.substring(1).split('&');
@@ -19,6 +18,7 @@
             }
             return args[key];
         }
+
         function appendParams(params, url) {
             var baseWithSearch = url.split('#')[0];
             var hash = url.split('#')[1];
@@ -67,7 +67,7 @@
             }, {
                 key: 'state',
                 value: state
-            }], authUrlBase);
+            }], 'https://open.weixin.qq.com/connect/oauth2/authorize#wechat_redirect');
         } else {
             redirectUrl = appendParams([{key: 'code', value: code}], getUrlParams('redirect_uri'));
         }
