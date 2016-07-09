@@ -4,11 +4,11 @@
 
 ## 使用方法
 
-1. 部署`get-weixin-code.html`至你的微信授权回调域名的目录下，例如`http://wx.abc.com/get-weixin-code.html`
+1. 部署`get-weixin-code.html`至你的微信授权回调域名的目录下
 
-2. 在其他页面的使用方式如下，类似于直接通过微信回调的方式，只是将回调地址改成了`get-weixin-code.html`的地址，另外省去了`response_type`参数（因为它只能为`code`）以及`#wechat_redirect`，它们会在`get-weixin-code.html`里面去加上
+2. 使用方式类似于直接通过微信回调的方式，只是将回调地址改成了`get-weixin-code.html`所在的地址，另外省去了`response_type`参数（因为它只能为`code`）以及`#wechat_redirect`（它是固定的），它们会在`get-weixin-code.html`里面自己加上
 
-3. `get-weixin-code.html`页面从微信那里拿到code之后会重新跳转回调用的页面，并且在url后面带上`code`和`state`
+3. `get-weixin-code.html`页面从微信那里拿到code之后会重新跳转回`redirect_uri`里面填写的url，并且在url后面带上`code`和`state`
 
 ## 详细示例
 
@@ -29,5 +29,7 @@
 - 如果你有这样的需求，可以使用本项目
 
 - 欢迎提交pull request
+
+- 建议先弄懂微信授权回调的流程再使用本项目
 
 - **很多朋友问我怎么支持第三方微信平台，这个需要对不同的第三方平台的授权方式有所了解，熟悉他们的授权方式，请求参数等。如果他们是通过在网站入口处的URL上进行授权的，那么可以使用本项目，将入口的URL改成上述的方式，如果他们是在流程中的某些页面去获取授权，那么是没法改变他们的获取地址的，所以本项目就不适用了**
