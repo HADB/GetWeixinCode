@@ -4,16 +4,16 @@
 
 ## 使用方法
 
-1. 部署get-weixin-code.html至你的微信授权回调域名的目录下，例如[http://wx.abc.com/get-weixin-code.html](#)
-2. 在其他页面的使用方式如下，类似于直接通过微信回调的方式，只是将回调地址改成了get-weixin-code.html的地址，另外省去了response_type参数（因为它只能为code）以及#wechat_redirect的hash，它们会在get-weixin-code.html里面去加上
-3. get-weixin-code.html页面从微信那里拿到code之后会重新跳转回调用的页面，并且在url后面带上code和state
+1. 部署 `get-weixin-code.html` 至你的微信授权回调域名的目录下，例如 `http://wx.abc.com/get-weixin-code.html` 
+2. 在其他页面的使用方式如下，类似于直接通过微信回调的方式，只是将回调地址改成了 `get-weixin-code.html` 的地址，另外省去了 `response_type` 参数（因为它只能为 `code` ）以及 `#wechat_redirect` ，它们会在 `get-weixin-code.html` 里面去加上
+3.  `get-weixin-code.html` 页面从微信那里拿到code之后会重新跳转回调用的页面，并且在url后面带上 `code` 和 `state`
 
 ## 详细示例
 
-1. 前往微信公众平台->接口权限->网页授权获取用户基本信息->修改，填写授权回调页面域名，例如www.abc.com
-2. 在www.abc.com域名下部署get-weixin-code.html，不一定是根目录，例如：[http://www.abc.com/xxx/get-weixin-code.html](#)
-3. 假设你的[http://www.xyz.com/hello-world.html](#)这个页面需要获取微信授权，那么你应该使用以下地址来获取授权：[http://www.abc.com/xxx/get-weixin-code.html?appid=XXXX&scope=snsapi_base&state=hello-world&redirect_uri=http%3A%2F%2Fwww.xyz.com%2Fhello-world.html](#)
-4. 这样最终就会跳转到这样一个地址：[http://www.xyz.com/hello-world.html?code=XXXXXXXXXXXXXXXXX&state=hello-world](#)，从而你就拿到了授权code以及自定义的state参数了
+1. 前往微信公众平台->接口权限->网页授权获取用户基本信息->修改，填写授权回调页面域名，例如 `www.abc.com`
+2. 在 `www.abc.com` 域名下部署 `get-weixin-code.html` ，不一定是根目录，例如：`http://www.abc.com/xxx/get-weixin-code.html`
+3. 假设你的`http://www.xyz.com/hello-world.html`这个页面需要获取微信授权，那么你应该使用以下地址来获取授权： `http://www.abc.com/xxx/get-weixin-code.html?appid=XXXX&scope=snsapi_base&state=hello-world&redirect_uri=http%3A%2F%2Fwww.xyz.com%2Fhello-world.html` 
+4. 这样最终就会跳转到这样一个地址： `http://www.xyz.com/hello-world.html?code=XXXXXXXXXXXXXXXXX&state=hello-world` ，从而你就拿到了授权 `code` 以及自定义的 `state` 参数了
 
 ## 其他说明
 
