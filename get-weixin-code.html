@@ -15,7 +15,7 @@
                     if (params[i].value !== undefined) {
                         var newParam = params[i].key + "=" + params[i].value;
                         if (baseWithSearch.indexOf('?') > 0) {
-                            var oldParamReg = new RegExp(params[i].key + '=[-\\w]{0,40}', 'g');
+                            var oldParamReg = new RegExp(params[i].key + '=[-%.!~*\'\(\)\\w]*', 'g');
 
                             if (oldParamReg.test(baseWithSearch)) {
                                 baseWithSearch = baseWithSearch.replace(oldParamReg, newParam);
