@@ -8,29 +8,33 @@
     <script>
         var GWC = {
             urlParams: {},
-            appendParams: function (params, url) {
-                var baseWithSearch = url.split('#')[0];
-                var hash = url.split('#')[1];
-                for (var i = 0; i < params.length; i++) {
-                    if (params[i].value !== undefined) {
-                        var newParam = params[i].key + "=" + params[i].value;
-                        if (baseWithSearch.indexOf('?') > 0) {
-                            var oldParamReg = new RegExp(params[i].key + '=[-%.!~*\'\(\)\\w]*', 'g');
+            appendParams: function (url, params) {
+                if (params) {
+                    var baseWithSearch = url.split('#')[0];
+                    var hash = url.split('#')[1];
+                    for (var key in params) {
+                        var attrValue = params[key];
+                        if (attrValue !== undefined) {
+                            var newParam = key + "=" + attrValue;
+                            if (baseWithSearch.indexOf('?') > 0) {
+                                var oldParamReg = new RegExp(key + '=[-%.!~*\'\(\)\\w]*', 'g');
 
-                            if (oldParamReg.test(baseWithSearch)) {
-                                baseWithSearch = baseWithSearch.replace(oldParamReg, newParam);
+                                if (oldParamReg.test(baseWithSearch)) {
+                                    baseWithSearch = baseWithSearch.replace(oldParamReg, newParam);
+                                } else {
+                                    baseWithSearch += "&" + newParam;
+                                }
                             } else {
-                                baseWithSearch += "&" + newParam;
+                                baseWithSearch += "?" + newParam;
                             }
-                        } else {
-                            baseWithSearch += "?" + newParam;
                         }
                     }
-                }
-                if (hash) {
-                    url = baseWithSearch + '#' + hash;
-                } else {
-                    url = baseWithSearch;
+
+                    if (hash) {
+                        url = baseWithSearch + '#' + hash;
+                    } else {
+                        url = baseWithSearch;
+                    }
                 }
                 return url;
             },
@@ -53,31 +57,19 @@
 
                 if (!code) {
                     //第一步，没有拿到code，跳转至微信授权页面获取code
-                    redirectUri = GWC.appendParams([{
-                        key: 'appid',
-                        value: appId
-                    }, {
-                        key: 'redirect_uri',
-                        value: encodeURIComponent(location.href)
-                    }, {
-                        key: 'response_type',
-                        value: 'code'
-                    }, {
-                        key: 'scope',
-                        value: scope
-                    }, {
-                        key: 'state',
-                        value: state
-                    }], 'https://open.weixin.qq.com/connect/oauth2/authorize#wechat_redirect');
+                    redirectUri = GWC.appendParams('https://open.weixin.qq.com/connect/oauth2/authorize#wechat_redirect', {
+                        'appid': appId,
+                        'redirect_uri': encodeURIComponent(location.href),
+                        'response_type': 'code',
+                        'scope': scope,
+                        'state': state,
+                    });
                 } else {
                     //第二步，从微信授权页面跳转回来，已经获取到了code，再次跳转到实际所需页面
-                    redirectUri = GWC.appendParams([{
-                        key: 'code',
-                        value: code
-                    }, {
-                        key: 'state',
-                        value: state
-                    }], GWC.urlParams['redirect_uri']);
+                    redirectUri = GWC.appendParams(GWC.urlParams['redirect_uri'], {
+                        'code': code,
+                        'state': state
+                    });
                 }
 
                 location.href = redirectUri;
