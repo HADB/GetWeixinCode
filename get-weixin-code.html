@@ -17,7 +17,7 @@
                         if (attrValue !== undefined) {
                             var newParam = key + "=" + attrValue;
                             if (baseWithSearch.indexOf('?') > 0) {
-                                var oldParamReg = new RegExp(key + '=[-%.!~*\'\(\)\\w]*', 'g');
+                                var oldParamReg = new RegExp('^'+key + '=[-%.!~*\'\(\)\\w]*', 'g');
 
                                 if (oldParamReg.test(baseWithSearch)) {
                                     baseWithSearch = baseWithSearch.replace(oldParamReg, newParam);
