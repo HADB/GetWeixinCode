@@ -20,6 +20,18 @@
 
 4. 这样最终就会跳转到这样一个地址：`http://www.xyz.com/hello-world.html?code=XXXXXXXXXXXXXXXXX&state=hello-world`，从而你就拿到了授权`code`以及自定义的`state`参数了
 
+## 特别感谢
+
+感谢以下朋友为本项目提供的贡献（排名不分先后）
+
+- [star769706697](https://github.com/star769706697)
+
+- [davidqhr](https://github.com/davidqhr)
+
+- [tianhe1986](https://github.com/tianhe1986)
+
+- [AnthonyHuang001](https://github.com/AnthonyHuang001)
+
 ## 其他说明
 
 - 通过多一次的跳转，解决了微信限制回调域名只能设置一个的问题
