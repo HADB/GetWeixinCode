@@ -32,6 +32,8 @@
 
 - [AnthonyHuang001](https://github.com/AnthonyHuang001)
 
+- [sanzhumu](https://github.com/sanzhumu)
+
 ## 其他说明
 
 - 通过多一次的跳转，解决了微信限制回调域名只能设置一个的问题
