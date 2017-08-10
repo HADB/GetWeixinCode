@@ -55,11 +55,17 @@
                     var appId = GWC.urlParams['appid'];
                     var scope = GWC.urlParams['scope'] || 'snsapi_base';
                     var state = GWC.urlParams['state'];
+                    var isMp = GWC.urlParams['isMp']; //isMp为true时使用开放平台作授权登录，false为网页扫码登录
+                    var baseUrl;
                     var redirectUri;
 
                     if (!code) {
+                        baseUrl = "https://open.weixin.qq.com/connect/oauth2/authorize#wechat_redirect";
+                        if(scope == 'snsapi_login' && !isMp){
+                            baseUrl = "https://open.weixin.qq.com/connect/qrconnect";
+                        }
                         //第一步，没有拿到code，跳转至微信授权页面获取code
-                        redirectUri = GWC.appendParams('https://open.weixin.qq.com/connect/oauth2/authorize#wechat_redirect', {
+                        redirectUri = GWC.appendParams(baseUrl, {
                             'appid': appId,
                             'redirect_uri': encodeURIComponent(location.href),
                             'response_type': 'code',
