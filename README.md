@@ -20,6 +20,10 @@
 
 4. 这样最终就会跳转到这样一个地址：`http://www.xyz.com/hello-world.html?code=XXXXXXXXXXXXXXXXX&state=hello-world`，从而你就拿到了授权`code`以及自定义的`state`参数了
 
+## Star走势图
+
+![Stargazers over time](https://starcharts.herokuapp.com/HADB/GetWeixinCode.svg)
+
 ## 特别感谢
 
 感谢以下朋友为本项目提供的贡献（排名不分先后）
@@ -49,3 +53,7 @@
 - **建议先弄懂微信授权回调的流程再使用本项目**
 
 - **很多朋友问我怎么支持第三方微信平台，这个需要对不同的第三方平台的授权方式有所了解，熟悉他们的授权方式，请求参数等。如果他们是通过在网站入口处的URL上进行授权的，那么可以使用本项目，将入口的URL改成上述的方式，如果他们是在流程中的某些页面去获取授权，那么是没法改变他们的获取地址的，所以本项目就不适用了**
+
+## 支持作者
+
+![Donation](donation.jpg)
