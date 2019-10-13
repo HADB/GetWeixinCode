@@ -33,7 +33,17 @@
                     }
 
                     if (hash) {
-                        url = baseWithSearch + '#' + hash;
+                        if (!hash.startsWith('/')) {
+                            hash = '/' + hash
+                        }
+                        var isHashWithQuery = hash.indexOf('?') !== -1 // /#/test?a=1&b=2
+                        var baseUrl = baseWithSearch.split('?')[0]
+                        var wxQueryString = baseWithSearch.split('?')[1]
+                        if (!baseUrl.endsWith('/')) {
+                            baseUrl += '/'
+                        }
+                        url = baseUrl + '#' + hash + isHashWithQuery ? '&' : '?' + wxQueryString
+                        // url = baseWithSearch + '#' + hash;
                     } else {
                         url = baseWithSearch;
                     }
